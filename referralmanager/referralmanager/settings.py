@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,9 +26,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'an)6g34x_t^^@3dx*mey#pjluvh=c#g2fpw43
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = os.environ.get('DEBUG', '') != 'False'
+DEBUG = False
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -95,19 +98,20 @@ WSGI_APPLICATION = 'referralmanager.wsgi.application'
 #    }
 # }
 
+
 DATABASES = {
-    'default': os.environ.get(('DATABASE_URL'), 
-        {
-        'ENGINE': 'django.db.backends.postgresql',
+    "default": {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'referral_manager',
         'USER': 'referraladmin',
         'PASSWORD': 'ambassador',
         'HOST': '127.0.0.1',
         'PORT': '5432'
-        }
-    )
+    }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -142,9 +146,15 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Heroku settings
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
