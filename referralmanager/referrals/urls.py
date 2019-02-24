@@ -12,6 +12,6 @@ urlpatterns = [
     url(
         r'^api/v1/referrals/$',
         views.get_post_referrals,
-        name='get_post_referral'
+        name='get_post_referrals'
     )
 ]
