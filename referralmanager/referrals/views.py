@@ -16,17 +16,20 @@ def get_delete_update_referral(request, pk):
 		referral = Referral.objects.get(pk=pk)
 	except Referral.DoesNotExist:
 		return Response(status = status.HTTP_404_NOT_FOUND)
-
+	# get single referral
 	if request.method == 'GET':
 		referral.clicks += 1
+		referral.save()
 		serializer = ReferralSerializer(referral)
 		return Response(serializer.data)
+	# update referral
 	elif request.method == 'PUT':
 		serializer = ReferralSerializer(referral, data=request.data)
 		if serializer.is_valid():
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+	# delete referral
 	elif request.method == 'DELETE':
 		referral.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
@@ -38,6 +41,7 @@ def get_post_referrals(request):
 		referrals = Referral.objects.all()
 		serializer = ReferralSerializer(referrals, many=True)
 		return Response(serializer.data)
+	# create new referral
 	elif request.method == 'POST':
 		data = {
 			'title': request.data.get('title'),

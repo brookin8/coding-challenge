@@ -40,7 +40,6 @@ class GetSingleReferralTest(TestCase):
             reverse("get_delete_update_referral", kwargs={'pk': self.Wolverines.pk})
         )
         expected = Referral.objects.get(pk=self.Wolverines.pk)
-        expected.clicks += 1
         serialized = ReferralSerializer(expected)
         self.assertEqual(response.data, serialized.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
