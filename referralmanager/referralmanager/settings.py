@@ -23,10 +23,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'an)6g34x_t^^@3dx*mey#pjluvh=c#g2fpw43zi7q=!is!#@%v'
-SECRET_KEY = os.environ.get('SECRET_KEY', 'an)6g34x_t^^@3dx*mey#pjluvh=c#g2fpw43zi7q=!is!#@%v')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = True
 
 # Application definition
@@ -141,7 +140,7 @@ USE_TZ = True
 
 # Heroku settings
 # Change 'default' database configuration with $DATABASE_URL.
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+DATABASES['default'].update(dj_database_url.config(default=config('DATABASE_URL'),conn_max_age=500, ssl_require=True))
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -153,7 +152,7 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = []
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 django_heroku.settings(locals())
