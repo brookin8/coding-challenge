@@ -54,6 +54,7 @@ MIDDLEWARE = [
     #'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ]
 
+# API Settings
 REST_FRAMEWORK = {
 }
 
