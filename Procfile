@@ -1,1 +1,1 @@
-web: gunicorn referralmanager.wsgi
+web: gunicorn referralmanager.referralmanager.wsgi
