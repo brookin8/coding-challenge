@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'referrals'
+    'referralmanager.referrals'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,7 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
 }
 
-ROOT_URLCONF = 'referralmanager.urls'
+ROOT_URLCONF = 'referralmanager.referralmanager.urls'
 
 TEMPLATES = [
     {
@@ -76,7 +76,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'referralmanager.wsgi.application'
+WSGI_APPLICATION = 'referralmanager.referralmanager.wsgi.application'
 
 
 # Database

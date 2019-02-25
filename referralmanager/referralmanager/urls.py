@@ -18,7 +18,7 @@ from django.urls import include, path
 from django.conf.urls import include, url
 
 urlpatterns = [
-	url(r'^', include('referrals.urls')),
+	url(r'^', include('referralmanager.referrals.urls')),
 	url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')
