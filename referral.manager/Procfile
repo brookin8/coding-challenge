@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath referral.manager referralmanager.wsgi --log-file -
+web: gunicorn referralmanager.wsgi --log-file -
