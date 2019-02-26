@@ -14,16 +14,16 @@
 
 #### Technologies: 
 
-	-	Django, Django Rest Framework, and Heroku were specified by the customer. 
-	-	PostgreSQL is open source, easy to startup quickly, provides better scalability than the default SQLite, and plays well with Heroku. Additionally, from the information provided, the Referral system can be easily represented by a basic relational setup. 
+-	Django, Django Rest Framework, and Heroku were specified by the customer. 
+-	PostgreSQL is open source, easy to startup quickly, provides better scalability than the default SQLite, and plays well with Heroku. Additionally, from the information provided, the Referral system can be easily represented by a basic relational setup. 
 
 #### Architecture:
 
-	-	First, a call out: I was constrained a little bit with directory choices by sticking to what works with Heroku. 
-	-	I kept everything to a single Referral model given that we aren't keeping track of any other type of entity or relationship. 
-	-	Within the Referral model, I only added the two 'Title' and 'Clicks' fields, given that the link will always just be a standard '{url}/ + title'
-	- 	I debated having the 'Clicks' increment action just be a part of the same endpoint as the GET call for the details of a single referral. However, I could think of a few other instances where that endpoint might be utilized and the customer would not want clicks incremented (IE a "details" screen, an edit screen that doesn't take the referral information directly from the rows in the list page). 
-	-	I chose instead to create a separate endpoint where a deliberate 'POST' call will increment the Clicks number for the relevant referral entry. 
+-	First, a call out: I was constrained a little bit with directory choices by sticking to what works with Heroku. 
+-	I kept everything to a single Referral model given that we aren't keeping track of any other type of entity or relationship. 
+-	Within the Referral model, I only added the two 'Title' and 'Clicks' fields, given that the link will always just be a standard '{url}/ + title'
+- 	I debated having the 'Clicks' increment action just be a part of the same endpoint as the GET call for the details of a single referral. However, I could think of a few other instances where that endpoint might be utilized and the customer would not want clicks incremented (IE a "details" screen, an edit screen that doesn't take the referral information directly from the rows in the list page). 
+-	I chose instead to create a separate endpoint where a deliberate 'POST' call will increment the Clicks number for the relevant referral entry. 
 
 ### Trade-Offs and Next Steps
 
