@@ -8,7 +8,7 @@ from rest_framework import status
 # Create your views here.
 
 def index(request):
-    return HttpResponse("Landing page")
+    return HttpResponse("Landing page placeholder")
 
 @api_view(['GET','PUT','DELETE'])
 def get_delete_update_referral(request, pk):
@@ -18,8 +18,6 @@ def get_delete_update_referral(request, pk):
 		return Response(status = status.HTTP_404_NOT_FOUND)
 	# get single referral
 	if request.method == 'GET':
-		referral.clicks += 1
-		referral.save()
 		serializer = ReferralSerializer(referral)
 		return Response(serializer.data)
 	# update referral
@@ -52,3 +50,15 @@ def get_post_referrals(request):
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def increment_referral_click(request, pk):
+	# increment referral clicks
+	try:
+		referral = Referral.objects.get(pk=pk)
+	except Referral.DoesNotExist:
+		return Response(status = status.HTTP_404_NOT_FOUND)
+	
+	referral.clicks += 1
+	referral.save()
+	return Response(status=status.HTTP_204_NO_CONTENT)
