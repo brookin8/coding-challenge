@@ -4,7 +4,7 @@
 
 -	The team needs to create a simple referral system to promote the World Wide Web. 
 -	The system should allow the customer to create, edit, delete, track, and view landing pages for referral links.
--	As a back-end developer, I need to build an API that supports all of these actions. 
+-	As a back-end developer, I would need to build an API that supports all of these actions. 
 
 ### Solution (Back-end)
 
